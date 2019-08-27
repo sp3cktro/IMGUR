@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36795B7F231593D800299651 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36795B7E231593D800299651 /* DetailViewController.swift */; };
+		36795B822315946B00299651 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36795B802315946B00299651 /* ItemCell.swift */; };
+		36795B832315946B00299651 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36795B812315946B00299651 /* ItemCell.xib */; };
+		36795B852315AEAA00299651 /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36795B842315AEAA00299651 /* ItemsTableViewController.swift */; };
 		42C6C16B231588420075B0E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6C16A231588420075B0E3 /* AppDelegate.swift */; };
-		42C6C16D231588420075B0E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6C16C231588420075B0E3 /* ViewController.swift */; };
-		42C6C170231588420075B0E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42C6C16E231588420075B0E3 /* Main.storyboard */; };
 		42C6C172231588430075B0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C6C171231588430075B0E3 /* Assets.xcassets */; };
 		42C6C175231588430075B0E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42C6C173231588430075B0E3 /* LaunchScreen.storyboard */; };
+		FC3514AE231857F300EB44D0 /* SearchPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3514AC231857F300EB44D0 /* SearchPopUpViewController.swift */; };
+		FC3514AF231857F300EB44D0 /* SearchPopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC3514AD231857F300EB44D0 /* SearchPopUpViewController.xib */; };
+		FC35CA232319CB5E0094CC26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC35CA222319CB5E0094CC26 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36795B7E231593D800299651 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		36795B802315946B00299651 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		36795B812315946B00299651 /* ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
+		36795B842315AEAA00299651 /* ItemsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
 		42C6C167231588420075B0E3 /* IMGUR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMGUR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C6C16A231588420075B0E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		42C6C16C231588420075B0E3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		42C6C16F231588420075B0E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42C6C171231588430075B0E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42C6C174231588430075B0E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42C6C176231588430075B0E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC3514AC231857F300EB44D0 /* SearchPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPopUpViewController.swift; sourceTree = "<group>"; };
+		FC3514AD231857F300EB44D0 /* SearchPopUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPopUpViewController.xib; sourceTree = "<group>"; };
+		FC35CA222319CB5E0094CC26 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +64,17 @@
 		42C6C169231588420075B0E3 /* IMGUR */ = {
 			isa = PBXGroup;
 			children = (
-				42C6C16A231588420075B0E3 /* AppDelegate.swift */,
-				42C6C16C231588420075B0E3 /* ViewController.swift */,
-				42C6C16E231588420075B0E3 /* Main.storyboard */,
 				42C6C171231588430075B0E3 /* Assets.xcassets */,
+				42C6C16A231588420075B0E3 /* AppDelegate.swift */,
+				36795B842315AEAA00299651 /* ItemsTableViewController.swift */,
+				36795B7E231593D800299651 /* DetailViewController.swift */,
+				36795B802315946B00299651 /* ItemCell.swift */,
+				FC35CA222319CB5E0094CC26 /* Main.storyboard */,
+				36795B812315946B00299651 /* ItemCell.xib */,
 				42C6C173231588430075B0E3 /* LaunchScreen.storyboard */,
 				42C6C176231588430075B0E3 /* Info.plist */,
+				FC3514AC231857F300EB44D0 /* SearchPopUpViewController.swift */,
+				FC3514AD231857F300EB44D0 /* SearchPopUpViewController.xib */,
 			);
 			path = IMGUR;
 			sourceTree = "<group>";
@@ -122,9 +137,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC3514AF231857F300EB44D0 /* SearchPopUpViewController.xib in Resources */,
+				FC35CA232319CB5E0094CC26 /* Main.storyboard in Resources */,
+				36795B832315946B00299651 /* ItemCell.xib in Resources */,
 				42C6C175231588430075B0E3 /* LaunchScreen.storyboard in Resources */,
 				42C6C172231588430075B0E3 /* Assets.xcassets in Resources */,
-				42C6C170231588420075B0E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42C6C16D231588420075B0E3 /* ViewController.swift in Sources */,
+				36795B822315946B00299651 /* ItemCell.swift in Sources */,
+				36795B7F231593D800299651 /* DetailViewController.swift in Sources */,
+				FC3514AE231857F300EB44D0 /* SearchPopUpViewController.swift in Sources */,
+				36795B852315AEAA00299651 /* ItemsTableViewController.swift in Sources */,
 				42C6C16B231588420075B0E3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +163,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		42C6C16E231588420075B0E3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				42C6C16F231588420075B0E3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		42C6C173231588430075B0E3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -213,7 +225,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -268,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -284,6 +296,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = IMGUR/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,6 +314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = IMGUR/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
