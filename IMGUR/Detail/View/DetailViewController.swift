@@ -8,7 +8,9 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, DetailViewControllerProtocol {
+    
+    var presenter: DetailPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()

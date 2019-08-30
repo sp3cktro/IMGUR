@@ -9,6 +9,9 @@
 import UIKit
 
 class ItemsTableViewController: UITableViewController {
+    
+    private var presenter: ItemsPresenterProtocol?
+    private var items: Pixabay?
 
     var image = UIImage(named: "search")
     var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
@@ -24,7 +27,9 @@ class ItemsTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
+        setup()
         
+        title = "Pixabay"
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
         tableView.tableFooterView = spinner
@@ -35,8 +40,6 @@ class ItemsTableViewController: UITableViewController {
         //Xib Cell configuration
         let itemCell = UINib(nibName: "ItemCell", bundle: nil)
         tableView.register(itemCell, forCellReuseIdentifier: "ItemCell")
-        
-        
         
         //Navigation bar configutarion
         image = image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
@@ -58,18 +61,34 @@ class ItemsTableViewController: UITableViewController {
         let vc = SearchPopUpViewController(nibName: "SearchPopUpViewController", bundle: nil)
         vc.modalPresentationStyle = .overCurrentContext
         self.navigationController?.present(vc, animated: true)
-        
+        presenter?.fillTable()
+    }
+    
+    //MARK: - Setup Actors
+    func setup() {
+        presenter = ItemsPresenter()
+        presenter?.setup(viewController: self)
+    }
+}
+
+//MARK: - ItemsTableViewControllerProtocol
+extension ItemsTableViewController: ItemsViewControllerProtocol {
+    func fillTable(with itemsFetched: Pixabay) {
+        items = itemsFetched
+        DispatchQueue.main.async { [unowned self] in
+            self.tableView.reloadData()
+        }
     }
 }
 
 // MARK: - TableView Protocols
 extension ItemsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return items?.hits.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 180
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,16 +96,19 @@ extension ItemsTableViewController {
             return UITableViewCell()
         }
         
+        cell.itemTitle?.text = items?.hits[indexPath.row].tags
+        cell.userName?.text = items?.hits[indexPath.row].user
+        guard let url = URL(string: items?.hits[indexPath.row].largeImageURL ?? "") else {
+            return cell
+        }
+        cell.itemImage?.load(from: url)
+        cell.itemImage?.contentMode = .scaleAspectFit
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let destination = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
-            return
-        }
-        destination.title = "DetailViewController"
-        navigationController?.pushViewController(destination, animated: true)
+       presenter?.presentDetailView()
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
