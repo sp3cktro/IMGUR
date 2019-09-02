@@ -61,13 +61,14 @@ class ItemsTableViewController: UITableViewController {
         let vc = SearchPopUpViewController(nibName: "SearchPopUpViewController", bundle: nil)
         vc.modalPresentationStyle = .overCurrentContext
         self.navigationController?.present(vc, animated: true)
-        presenter?.fillTable()
+//        presenter?.fillTable()
     }
     
     //MARK: - Setup Actors
     func setup() {
         presenter = ItemsPresenter()
         presenter?.setup(viewController: self)
+        presenter?.fillTable()
     }
 }
 
