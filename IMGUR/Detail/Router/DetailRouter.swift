@@ -2,7 +2,7 @@ import UIKit
 
 class DetailRouter: DetailRouterProtocol {
     
-    static func createDetailModule() -> UIViewController {
+    static func createDetailModule(imageURL: URL?) -> UIViewController? {
         guard let detailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return UIViewController() }
         
         let presenter: DetailPresenter = DetailPresenter()
@@ -16,6 +16,8 @@ class DetailRouter: DetailRouterProtocol {
         presenter.interactor = interactor
         
         detailViewController.presenter = presenter
+        
+        detailViewController.imageURL = imageURL
         
         return detailViewController
     }

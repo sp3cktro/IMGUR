@@ -4,9 +4,9 @@ import Foundation
 
 class MockItemsInteractor: ItemsInteractorProtocol {
     
-    var fetchItemsCalled = false
+    var fetchItemsCalled = 0
     
     func fetchItems(completionHandler: @escaping (Result<Pixabay, FetchError>) -> ()) {
-        fetchItemsCalled = true
+        fetchItemsCalled += 1
     }
 }

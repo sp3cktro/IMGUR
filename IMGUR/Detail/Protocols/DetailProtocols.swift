@@ -9,9 +9,8 @@ protocol DetailInteractorProtocol {
 }
 
 protocol DetailPresenterProtocol {
-    
 }
 
 protocol DetailRouterProtocol {
-    static func createDetailModule() -> UIViewController
+    static func createDetailModule(imageURL: URL?) -> UIViewController?
 }

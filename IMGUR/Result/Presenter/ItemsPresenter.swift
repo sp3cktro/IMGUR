@@ -2,9 +2,16 @@ import UIKit
 
 class ItemsPresenter: ItemsPresenterProtocol {
     
-    private var viewController: ItemsViewControllerProtocol?
-    private var interactor: ItemsInteractorProtocol?
-    private var router: ItemsRouterProtocol?
+    var viewController: ItemsViewControllerProtocol?
+    var interactor: ItemsInteractorProtocol?
+    var router: ItemsRouterProtocol?
+    
+    init(viewController: ItemsViewControllerProtocol?, interactor: ItemsInteractorProtocol = ItemsInteractor(), router: ItemsRouterProtocol = ItemsRouter()) {
+        self.viewController = viewController
+        self.interactor = interactor
+        self.router = router
+        self.router?.resultViewController = viewController
+    }
     
     func fillTable() {
         interactor?.fetchItems { [weak self] result in
@@ -18,14 +25,14 @@ class ItemsPresenter: ItemsPresenterProtocol {
         }
     }
     
-    func setup(viewController: ItemsViewControllerProtocol) {
-        self.viewController = viewController
-        interactor = ItemsInteractor()
-        router = ItemsRouter()
+    func presentDetailView(image: String?) {
+        guard let itemsViewController = viewController as? ItemsTableViewController else { return }
+        guard let image = image, let imageURL = URL(string: image) else { return }
+        router?.presentDetailView(navigationController: itemsViewController.navigationController, image: imageURL)
     }
     
-    func presentDetailView() {
+    func presentSearchPopUpView() {
         guard let itemsViewController = viewController as? ItemsTableViewController else { return }
-        router?.presentDetailView(navigationController: itemsViewController.navigationController)
+        router?.presentSearchView(navigationController: itemsViewController.navigationController)
     }
 }

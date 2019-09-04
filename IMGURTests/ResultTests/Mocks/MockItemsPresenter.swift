@@ -4,15 +4,25 @@ import Foundation
 
 class MockItemsPresenter: ItemsPresenterProtocol {
     
-    var setupCalled = false
-    var fillTableCalled = false
+    var setupCalled = 0
+    var fillTableCalled = 0
+    var presentDetailViewCalled = 0
+    var presentSearchPopUpViewCalled = 0
     
     func setup(viewController: ItemsViewControllerProtocol) {
-        setupCalled = true
+        setupCalled += 1
     }
     
     func fillTable() {
-        fillTableCalled = true
+        fillTableCalled += 1
+    }
+    
+    func presentDetailView(image: String?) {
+        presentDetailViewCalled += 1
+    }
+    
+    func presentSearchPopUpView() {
+        presentSearchPopUpViewCalled += 1
     }
 }
 

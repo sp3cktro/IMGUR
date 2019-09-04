@@ -11,23 +11,26 @@ import UIKit
 class ItemsTableViewController: UITableViewController {
     
     private var presenter: ItemsPresenterProtocol?
-    private var items: Pixabay?
+    var items: Pixabay? {
+        didSet {
+            DispatchQueue.main.async { [unowned self] in
+                self.tableView.reloadData()
+            }
+        }
+    }
 
     var image = UIImage(named: "search")
     var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
     var blurEffectView: UIVisualEffectView?
     let spinner = UIActivityIndicatorView(style: .gray)
-    //MARK: - Outlets
-    @IBOutlet weak var magnifyingGlassButton: UIButton!
-    @IBOutlet weak var headerView: UIView!
     
-
     //MARKS: - Life Cycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        setup()
+        presenter = ItemsPresenter(viewController: self)
+        setup(presenter: presenter)
         
         title = "Pixabay"
         spinner.color = UIColor.darkGray
@@ -44,6 +47,7 @@ class ItemsTableViewController: UITableViewController {
         //Navigation bar configutarion
         image = image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:image, style: .plain, target: self, action: #selector( magnifyinGlassAction))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "search_button_id"
     }
     
     //MARK: - Methods
@@ -56,19 +60,14 @@ class ItemsTableViewController: UITableViewController {
     }
     
      @objc private func magnifyinGlassAction(_ sender: Any) {
-        
         //View Controller Pop Up
-        let vc = SearchPopUpViewController(nibName: "SearchPopUpViewController", bundle: nil)
-        vc.modalPresentationStyle = .overCurrentContext
-        self.navigationController?.present(vc, animated: true)
-//        presenter?.fillTable()
+        presenter?.presentSearchPopUpView()
     }
     
     //MARK: - Setup Actors
-    func setup() {
-        presenter = ItemsPresenter()
-        presenter?.setup(viewController: self)
-        presenter?.fillTable()
+    func setup(presenter: ItemsPresenterProtocol?) {
+        self.presenter = presenter
+        self.presenter?.fillTable()
     }
 }
 
@@ -76,9 +75,6 @@ class ItemsTableViewController: UITableViewController {
 extension ItemsTableViewController: ItemsViewControllerProtocol {
     func fillTable(with itemsFetched: Pixabay) {
         items = itemsFetched
-        DispatchQueue.main.async { [unowned self] in
-            self.tableView.reloadData()
-        }
     }
 }
 
@@ -109,7 +105,7 @@ extension ItemsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       presenter?.presentDetailView()
+        presenter?.presentDetailView(image: items?.hits[indexPath.row].largeImageURL)
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
