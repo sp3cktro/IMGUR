@@ -9,7 +9,7 @@
 import Foundation
 
 class ServiceLayer {
-    class func request<T: Codable>(router: ImageRouter, completion: @escaping (Result<T, Error>) -> ()) {
+    class func request<T: Codable>(session: URLSession = .shared, router: ImageRouter, completion: @escaping (Result<T, Error>) -> ()) {
         var components = URLComponents()
         components.scheme = router.scheme
         components.host = router.host
@@ -22,7 +22,6 @@ class ServiceLayer {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = router.method
-        let session = URLSession(configuration: .default)
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else {
                 completion(.failure(error!))
