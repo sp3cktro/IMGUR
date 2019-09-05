@@ -9,22 +9,30 @@
 import UIKit
 
 class ItemsTableViewController: UITableViewController {
+    
+    var presenter: ItemsPresenterProtocol?
+    var items: Pixabay? {
+        didSet {
+            DispatchQueue.main.async { [unowned self] in
+                self.tableView.reloadData()
+            }
+        }
+    }
 
     var image = UIImage(named: "search")
     var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
     var blurEffectView: UIVisualEffectView?
     let spinner = UIActivityIndicatorView(style: .gray)
-    //MARK: - Outlets
-    @IBOutlet weak var magnifyingGlassButton: UIButton!
-    @IBOutlet weak var headerView: UIView!
     
-
     //MARKS: - Life Cycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        presenter = ItemsPresenter(viewController: self)
+        setup(presenter: presenter)
         
+        title = "Pixabay"
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
         tableView.tableFooterView = spinner
@@ -36,11 +44,10 @@ class ItemsTableViewController: UITableViewController {
         let itemCell = UINib(nibName: "ItemCell", bundle: nil)
         tableView.register(itemCell, forCellReuseIdentifier: "ItemCell")
         
-        
-        
         //Navigation bar configutarion
         image = image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:image, style: .plain, target: self, action: #selector( magnifyinGlassAction))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "search_button_id"
     }
     
     //MARK: - Methods
@@ -53,23 +60,32 @@ class ItemsTableViewController: UITableViewController {
     }
     
      @objc private func magnifyinGlassAction(_ sender: Any) {
-        
         //View Controller Pop Up
-        let vc = SearchPopUpViewController(nibName: "SearchPopUpViewController", bundle: nil)
-        vc.modalPresentationStyle = .overCurrentContext
-        self.navigationController?.present(vc, animated: true)
-        
+        presenter?.presentSearchPopUpView()
+    }
+    
+    //MARK: - Setup Actors
+    func setup(presenter: ItemsPresenterProtocol?) {
+        self.presenter = presenter
+        self.presenter?.fillTable()
+    }
+}
+
+//MARK: - ItemsTableViewControllerProtocol
+extension ItemsTableViewController: ItemsViewControllerProtocol {
+    func fillTable(with itemsFetched: Pixabay) {
+        items = itemsFetched
     }
 }
 
 // MARK: - TableView Protocols
 extension ItemsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return items?.hits.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 180
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,16 +93,19 @@ extension ItemsTableViewController {
             return UITableViewCell()
         }
         
+        cell.itemTitle?.text = items?.hits[indexPath.row].tags
+        cell.userName?.text = items?.hits[indexPath.row].user
+        guard let url = URL(string: items?.hits[indexPath.row].largeImageURL ?? "") else {
+            return cell
+        }
+        cell.itemImage?.load(from: url)
+        cell.itemImage?.contentMode = .scaleAspectFit
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let destination = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
-            return
-        }
-        destination.title = "DetailViewController"
-        navigationController?.pushViewController(destination, animated: true)
+        presenter?.presentDetailView(image: items?.hits[indexPath.row].largeImageURL)
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

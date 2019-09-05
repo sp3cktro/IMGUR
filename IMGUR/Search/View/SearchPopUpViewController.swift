@@ -8,8 +8,10 @@
 
 import UIKit
 
-class SearchPopUpViewController: UIViewController {
+class SearchPopUpViewController: UIViewController, Storyboarded {
 
+    //MARK: - Architecture variables
+    private var presenter: SearchPresenterProtocol?
     
     //MARK: - Outlets
     @IBOutlet weak var searchView: UIView!
@@ -27,10 +29,16 @@ class SearchPopUpViewController: UIViewController {
         //Navigation controller configuration
         navigationController?.isNavigationBarHidden = true
         
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.frame
+        blurEffectView.frame = UIScreen.main.bounds
         view.insertSubview(blurEffectView, at: 0)
+        
+        presenter = SearchPresenter(viewController: self)
+        
+        keywordTextField.accessibilityIdentifier = "search_keyword_text_field"
+        searchButton.accessibilityIdentifier = "search_search_button"
+        cancelButton.accessibilityIdentifier = "search_cancel_button"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,12 +46,21 @@ class SearchPopUpViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        presenter?.cancelTapped()
     }
     
     @IBAction func searchAction(_ sender: Any) {
+        guard let entry = keywordTextField.text else { return }
+        presenter?.getImages(for: entry)
     }
  
+    func passRouter(itemsRouter router: ItemsRouterProtocol) {
+        presenter?.passRouter(router: router)
+    }
 }
 
-
+extension SearchPopUpViewController: SearchViewControllerProtocol {
+    func dismissSearchViewController() {
+        dismiss(animated: true, completion: nil)
+    }
+}
