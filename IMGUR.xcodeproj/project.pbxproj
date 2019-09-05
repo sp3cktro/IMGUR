@@ -14,6 +14,8 @@
 		42C6C16B231588420075B0E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6C16A231588420075B0E3 /* AppDelegate.swift */; };
 		42C6C172231588430075B0E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C6C171231588430075B0E3 /* Assets.xcassets */; };
 		42C6C175231588430075B0E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42C6C173231588430075B0E3 /* LaunchScreen.storyboard */; };
+		506ED3B323207FFD006DFD21 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506ED3B123207FFC006DFD21 /* ServiceLayer.swift */; };
+		506ED3B423207FFD006DFD21 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506ED3B223207FFC006DFD21 /* Router.swift */; };
 		50B84D712320687E003C8E51 /* Pixabay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B84D702320687D003C8E51 /* Pixabay.swift */; };
 		FC3514AE231857F300EB44D0 /* SearchPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3514AC231857F300EB44D0 /* SearchPopUpViewController.swift */; };
 		FC3514AF231857F300EB44D0 /* SearchPopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC3514AD231857F300EB44D0 /* SearchPopUpViewController.xib */; };
@@ -30,6 +32,8 @@
 		42C6C171231588430075B0E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42C6C174231588430075B0E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42C6C176231588430075B0E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		506ED3B123207FFC006DFD21 /* ServiceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
+		506ED3B223207FFC006DFD21 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		50B84D702320687D003C8E51 /* Pixabay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixabay.swift; sourceTree = "<group>"; };
 		FC3514AC231857F300EB44D0 /* SearchPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPopUpViewController.swift; sourceTree = "<group>"; };
 		FC3514AD231857F300EB44D0 /* SearchPopUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPopUpViewController.xib; sourceTree = "<group>"; };
@@ -66,7 +70,8 @@
 		42C6C169231588420075B0E3 /* IMGUR */ = {
 			isa = PBXGroup;
 			children = (
-				50B84D6F2320687D003C8E51 /* Entity */,
+				506ED3B023207FFC006DFD21 /* network */,
+				50B84D6F2320687D003C8E51 /* entity */,
 				42C6C171231588430075B0E3 /* Assets.xcassets */,
 				42C6C16A231588420075B0E3 /* AppDelegate.swift */,
 				36795B842315AEAA00299651 /* ItemsTableViewController.swift */,
@@ -82,12 +87,21 @@
 			path = IMGUR;
 			sourceTree = "<group>";
 		};
-		50B84D6F2320687D003C8E51 /* Entity */ = {
+		506ED3B023207FFC006DFD21 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				506ED3B123207FFC006DFD21 /* ServiceLayer.swift */,
+				506ED3B223207FFC006DFD21 /* Router.swift */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		50B84D6F2320687D003C8E51 /* entity */ = {
 			isa = PBXGroup;
 			children = (
 				50B84D702320687D003C8E51 /* Pixabay.swift */,
 			);
-			path = Entity;
+			path = entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,12 +177,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				506ED3B423207FFD006DFD21 /* Router.swift in Sources */,
 				36795B822315946B00299651 /* ItemCell.swift in Sources */,
 				36795B7F231593D800299651 /* DetailViewController.swift in Sources */,
 				50B84D712320687E003C8E51 /* Pixabay.swift in Sources */,
 				FC3514AE231857F300EB44D0 /* SearchPopUpViewController.swift in Sources */,
 				36795B852315AEAA00299651 /* ItemsTableViewController.swift in Sources */,
 				42C6C16B231588420075B0E3 /* AppDelegate.swift in Sources */,
+				506ED3B323207FFD006DFD21 /* ServiceLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
