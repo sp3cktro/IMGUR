@@ -54,6 +54,9 @@ class SearchPopUpViewController: UIViewController, Storyboarded {
         presenter?.getImages(for: entry)
     }
  
+    func passRouter(itemsRouter router: ItemsRouterProtocol) {
+        presenter?.passRouter(router: router)
+    }
 }
 
 extension SearchPopUpViewController: SearchViewControllerProtocol {

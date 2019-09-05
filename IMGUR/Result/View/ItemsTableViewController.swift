@@ -10,7 +10,7 @@ import UIKit
 
 class ItemsTableViewController: UITableViewController {
     
-    private var presenter: ItemsPresenterProtocol?
+    var presenter: ItemsPresenterProtocol?
     var items: Pixabay? {
         didSet {
             DispatchQueue.main.async { [unowned self] in

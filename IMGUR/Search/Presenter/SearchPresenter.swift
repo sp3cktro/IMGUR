@@ -3,7 +3,7 @@ import Foundation
 class SearchPresenter: SearchPresenterProtocol {
     
     //MARK: - Architecture variables
-    var viewController: SearchViewControllerProtocol?
+    weak var viewController: SearchViewControllerProtocol?
     var router: SearchRouterProtocol?
     var interactor: SearchInteractorProtocol?
     
@@ -23,6 +23,10 @@ class SearchPresenter: SearchPresenterProtocol {
                 break
             }
         }
+    }
+    
+    func passRouter(router: ItemsRouterProtocol) {
+        self.router?.itemsRouter = router
     }
     
     func cancelTapped() {

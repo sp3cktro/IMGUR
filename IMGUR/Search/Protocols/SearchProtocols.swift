@@ -5,12 +5,13 @@ protocol SearchViewControllerProtocol: class {
 }
 
 protocol SearchInteractorProtocol {
-    func getImages(for keyword: String, completionHandler: @escaping (Result<Pixabay,FetchError>) -> ())
+    func getImages(for keyword: String, completionHandler: @escaping (Result<Pixabay,Error>) -> ())
 }
 
 protocol SearchPresenterProtocol {
     func getImages(for keyword: String)
     func cancelTapped()
+    func passRouter(router: ItemsRouterProtocol)
 }
 
 protocol SearchRouterProtocol {

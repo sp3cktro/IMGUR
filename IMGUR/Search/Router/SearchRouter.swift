@@ -7,6 +7,7 @@ class SearchRouter: SearchRouterProtocol {
     
     func updateTable(info: Pixabay?) {
         itemsRouter?.didRecieveUpdate(info: info)
+        dismissSearchViewController()
     }
     
     func dismissSearchViewController() {

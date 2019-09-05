@@ -18,5 +18,6 @@ class ItemsRouter: ItemsRouterProtocol {
         let vc = SearchPopUpViewController.instantiateXib(from: "SearchPopUpViewController")
         vc.modalPresentationStyle = .overCurrentContext
         navigationController?.present(vc, animated: true)
+        vc.passRouter(itemsRouter: self)
     }
 }
