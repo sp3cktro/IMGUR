@@ -9,7 +9,7 @@
 import Foundation
 
 enum ImageRouter {
-    case getImages
+    case getImages(String)
     
     var scheme: String {
         return "https"
@@ -30,10 +30,10 @@ enum ImageRouter {
         let accessToken = "13435762-8cdfa77ad675450cea0066f89"
         
         switch self {
-        case .getImages:
+        case .getImages(let queryString):
             return [URLQueryItem(name: "key", value: accessToken),
-            URLQueryItem(name: "q", value: "Scarlett Johansson"),
-            URLQueryItem(name: "per_page", value: "2")]
+            URLQueryItem(name: "q", value: queryString),
+            URLQueryItem(name: "per_page", value: "10")]
         }
     }
     

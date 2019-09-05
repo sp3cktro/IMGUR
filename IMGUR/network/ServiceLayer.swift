@@ -9,22 +9,22 @@
 import Foundation
 
 class ServiceLayer {
-    class func request<T: Codable>(router: ImageRouter, completion: @escaping (Result<[String: [T]], Error>) -> ()) {
+    class func request<T: Codable>(router: ImageRouter, completion: @escaping (Result<T, Error>) -> ()) {
         var components = URLComponents()
         components.scheme = router.scheme
         components.host = router.host
         components.path = router.path
         components.queryItems = router.parameters
         
-        guard let url = components.url else { return }
+        guard let url = components.url else {
+            return
+        }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = router.method
-        
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else {
-                debugPrint(error!.localizedDescription)
                 completion(.failure(error!))
                 return
             }
@@ -38,8 +38,14 @@ class ServiceLayer {
             }
             
             let decoder = JSONDecoder()
-            let responseObject = try! decoder.decode([String: [T]].self, from: data)
-            completion(.success(responseObject))
+            
+            do {
+                let responseObject = try decoder.decode(T.self, from: data)
+                completion(.success(responseObject))
+            }
+            catch {
+                completion(.failure(error))
+            }
         }
         
         task.resume()
