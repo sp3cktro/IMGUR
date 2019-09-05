@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2332D8B12321C9A600266993 /* ServiceLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2332D8AE2321C9A600266993 /* ServiceLayerTests.swift */; };
+		2332D8B22321C9A600266993 /* StubURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2332D8AF2321C9A600266993 /* StubURLSession.swift */; };
+		2332D8B32321C9A600266993 /* StubDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2332D8B02321C9A600266993 /* StubDataTask.swift */; };
+		2332D8B52321C9CC00266993 /* NetworkingProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2332D8B42321C9CC00266993 /* NetworkingProtocols.swift */; };
 		36795B7F231593D800299651 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36795B7E231593D800299651 /* DetailViewController.swift */; };
 		36795B822315946B00299651 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36795B802315946B00299651 /* ItemCell.swift */; };
 		36795B832315946B00299651 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36795B812315946B00299651 /* ItemCell.xib */; };
@@ -22,7 +26,23 @@
 		FC35CA232319CB5E0094CC26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC35CA222319CB5E0094CC26 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2332D8A82321C94D00266993 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42C6C15F231588420075B0E3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42C6C166231588420075B0E3;
+			remoteInfo = IMGUR;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2332D8A32321C94D00266993 /* IMGURTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMGURTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2332D8A72321C94D00266993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2332D8AE2321C9A600266993 /* ServiceLayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLayerTests.swift; sourceTree = "<group>"; };
+		2332D8AF2321C9A600266993 /* StubURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubURLSession.swift; sourceTree = "<group>"; };
+		2332D8B02321C9A600266993 /* StubDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubDataTask.swift; sourceTree = "<group>"; };
+		2332D8B42321C9CC00266993 /* NetworkingProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingProtocols.swift; sourceTree = "<group>"; };
 		36795B7E231593D800299651 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		36795B802315946B00299651 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		36795B812315946B00299651 /* ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
@@ -41,6 +61,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2332D8A02321C94D00266993 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42C6C164231588420075B0E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -51,10 +78,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2332D8A42321C94D00266993 /* IMGURTests */ = {
+			isa = PBXGroup;
+			children = (
+				2332D8AD2321C96A00266993 /* NetworkingTest */,
+				2332D8A72321C94D00266993 /* Info.plist */,
+			);
+			path = IMGURTests;
+			sourceTree = "<group>";
+		};
+		2332D8AD2321C96A00266993 /* NetworkingTest */ = {
+			isa = PBXGroup;
+			children = (
+				2332D8AE2321C9A600266993 /* ServiceLayerTests.swift */,
+				2332D8B02321C9A600266993 /* StubDataTask.swift */,
+				2332D8AF2321C9A600266993 /* StubURLSession.swift */,
+			);
+			path = NetworkingTest;
+			sourceTree = "<group>";
+		};
 		42C6C15E231588420075B0E3 = {
 			isa = PBXGroup;
 			children = (
 				42C6C169231588420075B0E3 /* IMGUR */,
+				2332D8A42321C94D00266993 /* IMGURTests */,
 				42C6C168231588420075B0E3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				42C6C167231588420075B0E3 /* IMGUR.app */,
+				2332D8A32321C94D00266993 /* IMGURTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,6 +138,7 @@
 		506ED3B023207FFC006DFD21 /* network */ = {
 			isa = PBXGroup;
 			children = (
+				2332D8B42321C9CC00266993 /* NetworkingProtocols.swift */,
 				506ED3B123207FFC006DFD21 /* ServiceLayer.swift */,
 				506ED3B223207FFC006DFD21 /* Router.swift */,
 			);
@@ -107,6 +156,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2332D8A22321C94D00266993 /* IMGURTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2332D8AC2321C94D00266993 /* Build configuration list for PBXNativeTarget "IMGURTests" */;
+			buildPhases = (
+				2332D89F2321C94D00266993 /* Sources */,
+				2332D8A02321C94D00266993 /* Frameworks */,
+				2332D8A12321C94D00266993 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2332D8A92321C94D00266993 /* PBXTargetDependency */,
+			);
+			name = IMGURTests;
+			productName = IMGURTests;
+			productReference = 2332D8A32321C94D00266993 /* IMGURTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		42C6C166231588420075B0E3 /* IMGUR */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42C6C179231588430075B0E3 /* Build configuration list for PBXNativeTarget "IMGUR" */;
@@ -134,6 +201,11 @@
 				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = specktro;
 				TargetAttributes = {
+					2332D8A22321C94D00266993 = {
+						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1030;
+						TestTargetID = 42C6C166231588420075B0E3;
+					};
 					42C6C166231588420075B0E3 = {
 						CreatedOnToolsVersion = 10.3;
 					};
@@ -153,11 +225,19 @@
 			projectRoot = "";
 			targets = (
 				42C6C166231588420075B0E3 /* IMGUR */,
+				2332D8A22321C94D00266993 /* IMGURTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2332D8A12321C94D00266993 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42C6C165231588420075B0E3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -173,6 +253,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2332D89F2321C94D00266993 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2332D8B22321C9A600266993 /* StubURLSession.swift in Sources */,
+				2332D8B32321C9A600266993 /* StubDataTask.swift in Sources */,
+				2332D8B12321C9A600266993 /* ServiceLayerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42C6C163231588420075B0E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -185,10 +275,19 @@
 				36795B852315AEAA00299651 /* ItemsTableViewController.swift in Sources */,
 				42C6C16B231588420075B0E3 /* AppDelegate.swift in Sources */,
 				506ED3B323207FFD006DFD21 /* ServiceLayer.swift in Sources */,
+				2332D8B52321C9CC00266993 /* NetworkingProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2332D8A92321C94D00266993 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42C6C166231588420075B0E3 /* IMGUR */;
+			targetProxy = 2332D8A82321C94D00266993 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		42C6C173231588430075B0E3 /* LaunchScreen.storyboard */ = {
@@ -202,6 +301,51 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2332D8AA2321C94D00266993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BXVMA664J7;
+				INFOPLIST_FILE = IMGURTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = globant.IMGURTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMGUR.app/IMGUR";
+			};
+			name = Debug;
+		};
+		2332D8AB2321C94D00266993 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BXVMA664J7;
+				INFOPLIST_FILE = IMGURTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = globant.IMGURTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMGUR.app/IMGUR";
+			};
+			name = Release;
+		};
 		42C6C177231588430075B0E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -357,6 +501,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2332D8AC2321C94D00266993 /* Build configuration list for PBXNativeTarget "IMGURTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2332D8AA2321C94D00266993 /* Debug */,
+				2332D8AB2321C94D00266993 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		42C6C162231588420075B0E3 /* Build configuration list for PBXProject "IMGUR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
