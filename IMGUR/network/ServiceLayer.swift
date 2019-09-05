@@ -8,8 +8,10 @@
 
 import Foundation
 
+extension URLSession: URLSessionProtocol {}
+
 class ServiceLayer {
-    class func request<T: Codable>(session: URLSession = .shared, router: ImageRouter, completion: @escaping (Result<T, Error>) -> ()) {
+    class func request<T: Codable>(session: URLSessionProtocol = URLSession(configuration: .default), router: ImageRouter, completion: @escaping (Result<T, Error>) -> ()) {
         var components = URLComponents()
         components.scheme = router.scheme
         components.host = router.host
