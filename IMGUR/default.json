@@ -1,0 +1,28 @@
+{
+    "totalHits": 500,
+    "hits": [
+        {
+            "largeImageURL": "https://pixabay.com/get/54e2dc424353aa14f6da8c7dda79367d1136dce150536c4870297cd2954dc059bb_1280.jpg",
+            "webformatHeight": 426,
+            "webformatWidth": 640,
+            "likes": 251,
+            "imageWidth": 6000,
+            "id": 2291916,
+            "user_id": 661512,
+            "views": 94664,
+            "comments": 17,
+            "pageURL": "https://pixabay.com/photos/gear-bicycle-chain-transmission-2291916/",
+            "imageHeight": 4000,
+            "webformatURL": "https://pixabay.com/get/54e2dc424353aa14f6da8c7dda79367d1136dce150536c4870297cd2954dc059bb_640.jpg",
+            "type": "photo",
+            "previewHeight": 99,
+            "tags": "gear, bicycle, chain",
+            "downloads": 70550,
+            "user": "JarkkoManty",
+            "favorites": 250,
+            "imageSize": 8386419,
+            "previewWidth": 150,
+            "userImageURL": "https://cdn.pixabay.com/user/2019/08/01/20-23-01-127_250x250.jpg",
+            "previewURL": "https://cdn.pixabay.com/photo/2017/05/07/09/03/gear-2291916_150.jpg"
+        }]
+}

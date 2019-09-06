@@ -40,11 +40,10 @@ class ItemsTableViewController: UITableViewController {
         let itemCell = UINib(nibName: "ItemCell", bundle: nil)
         tableView.register(itemCell, forCellReuseIdentifier: "ItemCell")
         
-        
-        
         //Navigation bar configutarion
         image = image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:image, style: .plain, target: self, action: #selector( magnifyinGlassAction))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "search_button_id"
     }
     
     //MARK: - Methods
@@ -68,7 +67,7 @@ class ItemsTableViewController: UITableViewController {
 // MARK: - TableView Protocols
 extension ItemsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.hits?.count ?? 0
+        return viewModel?.hits?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
