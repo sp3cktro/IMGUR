@@ -16,9 +16,9 @@ class ItemsPresenterTests: XCTestCase {
         // Given
         let viewControllerMock = MockItemsListTableViewController()
         let sut = ItemsPresenter(viewController: viewControllerMock)
-        let reponseMock = ItemsLogicModel.Response.Pixabay(totalHits: 1, hits: [ItemsLogicModel.Response.Hit(largeImageURL: "T##String", tags: "T##String", user: "T##String", userImageURL: "VCXV", previewURL: "T##String")])
+        let dummyResponse = ItemsLogicModel.Response.Pixabay(totalHits: 1, hits: [ItemsLogicModel.Response.Hit(largeImageURL: "T##String", tags: "T##String", user: "T##String", userImageURL: "VCXV", previewURL: "T##String")])
         // When
-        sut.presentItems(response: reponseMock)
+        sut.presentItems(response: dummyResponse)
         // Then
         XCTAssertTrue(viewControllerMock.displayItemsCalled)
     }

@@ -9,8 +9,8 @@
 import Foundation
 @testable import IMGUR
 
-class MockItemsListRouter: ItemsRoutingLogic, ItemDataPassing {
-    
+class MockItemsListRouter: ItemDataPassing, ItemsRoutingLogic {
+ 
     var dataStore: ItemDataStore?
     var routeToSearchPopUpCalled = false
     var routeToDetailCalled = false
@@ -20,7 +20,7 @@ class MockItemsListRouter: ItemsRoutingLogic, ItemDataPassing {
         routeToSearchPopUpCalled = true
     }
     
-    func routeToDetail(indexPath: Int) {
+    func routeToDetail(image: String) {
         routeToDetailCalled = true
     }
     

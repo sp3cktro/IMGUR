@@ -46,10 +46,6 @@ final class SearchPopUpViewController: UIViewController, SearchDisplayLogcic {
         cancelButton.accessibilityIdentifier = "search_cancel_button"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
-    }
-    
     //Setup Scenes
     func setupViewController(interactor: SearchBusinessLogic, router: (SearchRoutingLogic & SearchDataPassing)) {
         self.interactor = interactor

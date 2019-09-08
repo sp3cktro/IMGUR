@@ -11,16 +11,14 @@ import Foundation
 class ItemsWorker {
     
     //MARK: - Class Methods
-    func fetchItems(completionHandler: @escaping (Result<ItemsLogicModel.Response.Pixabay,FetchError>) -> ()) {
-        let jsonDecoder = JSONDecoder()
-        guard let url = Bundle.main.url(forResource: "default", withExtension: "json"), let data = try? Data(contentsOf: url) else {
-            completionHandler(.failure(.badURL))
-            return
+    func getImages(for keyword: String, completionHandler: @escaping (Result<ItemsLogicModel.Response.Pixabay, Error>) -> ()) {
+        ServiceLayer.request(router: ImageRouter.getImages(keyword)) { (result: Result<ItemsLogicModel.Response.Pixabay, Error>) in
+            switch result {
+            case .success(let pixabay):
+                completionHandler(.success(pixabay))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
         }
-        guard let decodedJSON = try? jsonDecoder.decode(ItemsLogicModel.Response.Pixabay.self, from: data) else {
-            completionHandler(.failure(.badDecoded))
-            return
-        }
-        completionHandler(.success(decodedJSON))
     }
 }

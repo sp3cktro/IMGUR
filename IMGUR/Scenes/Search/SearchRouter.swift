@@ -19,6 +19,13 @@ protocol SearchDataPassing {
 }
 
 class SearchRouter: SearchRoutingLogic, SearchDataPassing{
+    func routeToItemsListCancelButton() {
+        guard let navigation = viewController?.presentingViewController as? UINavigationController, let destinationVC = navigation.viewControllers.first as? ItemsTableViewController else {
+            return
+        }
+        destinationVC.router?.dismissPresent()
+    }
+    
     
     var dataStore: SearchDataStore?
     weak var viewController: SearchPopUpViewController?
@@ -41,16 +48,6 @@ class SearchRouter: SearchRoutingLogic, SearchDataPassing{
             return
         }
         passDataToListItems(source: dataStoreSource, destination: &destinationDS)
-        destinationVC.router?.dismissPresent()
-//        viewController?.dismiss(animated: true, completion: {
-//            destinationVC.showItems()
-//        })
-    }
-    
-    func routeToItemsListCancelButton() {
-        guard let navigation = viewController?.presentingViewController as? UINavigationController, let destinationVC = navigation.viewControllers.first as? ItemsTableViewController else {
-            return
-        }
         destinationVC.router?.dismissPresent()
     }
     

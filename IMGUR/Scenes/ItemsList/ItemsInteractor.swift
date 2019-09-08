@@ -30,20 +30,16 @@ class ItemsInteractor: ItemBusinesslogic, ItemDataStore {
     
     func showItems(request: ItemsLogicModel.Request) {
         let keywordInteractor = keyword
-        worker.fetchItems { [weak self] result in
+        
+        worker.getImages(for: keywordInteractor) { [weak self] result in
             switch result {
-            case .success(let model):
-                self?.item = model
-                guard let response = self?.item else {
-                    return
-                }
+            case .success(let response):
                 self?.presenter?.presentItems(response: response)
             case .failure:
                 break
             }
-           print(keywordInteractor)
+            
         }
-        
-       
     }
 }
+

@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchPopUpViewController" customModule="IMGUR" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="RbV-VC-Ye7" id="OlC-ZD-STd"/>
+                <outlet property="cancelButton" destination="RbV-VC-Ye7" id="Slq-vO-kbV"/>
                 <outlet property="keywordTextField" destination="ges-kp-I05" id="NWx-fr-5VH"/>
                 <outlet property="searchButton" destination="xGh-Tj-ObI" id="rgS-sD-pu5"/>
                 <outlet property="searchView" destination="owK-V9-go0" id="AjM-Z5-EBf"/>

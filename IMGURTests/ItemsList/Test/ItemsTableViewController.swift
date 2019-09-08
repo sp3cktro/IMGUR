@@ -69,20 +69,20 @@ class ItemsTableViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut?.tableView)
     }
     
-//    func testCustomItemCellCanInstance() {
-//        // given
-//        let dummyIndexPath = IndexPath(item: 0, section: 0)
-//        // when
-//        sut?.loadViewIfNeeded()
-//        let itemCell = UINib(nibName: CellConstants.itemCellId.rawValue, bundle: nil)
-//        sut?.tableView.register(itemCell, forCellReuseIdentifier: CellConstants.itemCellId.rawValue)
-//        guard let sectionTableView = sut?.tableView else {
-//            XCTFail()
-//            return
-//        }
-//        // then
-//        XCTAssertNotNil(sut?.tableView(sectionTableView, cellForRowAt: dummyIndexPath) as? ItemCell)
-//    }
+    func testCustomItemCellCanInstance() {
+        // given
+        let dummyIndexPath = IndexPath(item: 0, section: 0)
+        // when
+        sut?.loadViewIfNeeded()
+        let itemCell = UINib(nibName: CellConstants.itemCellId.rawValue, bundle: nil)
+        sut?.tableView.register(itemCell, forCellReuseIdentifier: CellConstants.itemCellId.rawValue)
+        guard let sectionTableView = sut?.tableView else {
+            XCTFail()
+            return
+        }
+        // then
+        XCTAssertNotNil(sut?.tableView(sectionTableView, cellForRowAt: dummyIndexPath) as? ItemCell)
+    }
     
     func testTableViewCellLabelsShowsCorrectInformation() {
         // given

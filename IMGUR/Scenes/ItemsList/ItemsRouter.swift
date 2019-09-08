@@ -10,7 +10,7 @@ import UIKit
 
 protocol ItemsRoutingLogic {
     func routeToSearchPopUp()
-    func routeToDetail(indexPath: Int)
+    func routeToDetail(image: String)
     func dismissPresent()
 }
 
@@ -34,7 +34,7 @@ class ItemRouter: ItemsRoutingLogic, ItemDataPassing {
         viewController?.present(vc, animated: true)
     }
     
-     func routeToDetail(indexPath: Int) {
+     func routeToDetail(image: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let destinationVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
             return
@@ -46,17 +46,19 @@ class ItemRouter: ItemsRoutingLogic, ItemDataPassing {
         guard let dataStoreSource = dataStore else {
             return
         }
-        passDataToDetail(source: dataStoreSource, destination: &destinationDS, indexPath: indexPath)
+        passDataToDetail(source: dataStoreSource, destination: &destinationDS, image: image)
         
     }
     
     func dismissPresent() {
-        viewController?.dismiss(animated: true, completion: nil)
+        viewController?.dismiss(animated: true, completion: { [weak self] in
+            self?.viewController?.showItems()
+        })
     }
     
     // MARK: Passing data
-    private func passDataToDetail(source: ItemDataStore, destination: inout DetailDataStore, indexPath: Int) {
-        destination.urlImage = source.item.hits[indexPath].largeImageURL
+    private func passDataToDetail(source: ItemDataStore, destination: inout DetailDataStore, image: String) {
+        destination.urlImage = image
     }
 
 }

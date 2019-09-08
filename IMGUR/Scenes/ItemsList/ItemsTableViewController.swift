@@ -27,6 +27,8 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
         super.viewDidLoad()
        
         setupScene()
+        showItems()
+        
         items = ItemsLogicModel.Response.Pixabay(totalHits: 0, hits: [])
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
@@ -43,10 +45,7 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
         
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "search_button_id"
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        showItems()
-    }
+
     func setupViewController(interactor: ItemBusinesslogic, router: (ItemsRoutingLogic & ItemDataPassing)) {
         self.interactor = interactor
         self.router = router
@@ -65,8 +64,7 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
         // Fetch Photos method here
         let timeToRefresh = DispatchTime.now() + .milliseconds(100)
         DispatchQueue.main.asyncAfter(deadline: timeToRefresh) { [weak self] in
-            
-            self?.showItems()
+             self?.showItems()
         }
     }
     
@@ -76,11 +74,16 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
         
     }
     
+    @IBAction func dismissSearchPopUp(segue: UIStoryboardSegue) {
+    }
+    
     func displayItems(itemsFetched: ItemsLogicModel.Response.Pixabay) {
         items = itemsFetched
-        self.tableView.reloadData()
-        spinner.stopAnimating()
-        refreshControl?.endRefreshing()
+        DispatchQueue.main.async() { [weak self] in
+           self?.tableView.reloadData()
+        }
+//        spinner.stopAnimating()
+//        refreshControl?.endRefreshing()
     }
     
     func showItems() {
@@ -115,7 +118,7 @@ extension ItemsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        router?.routeToDetail(indexPath: indexPath.row)
+        router?.routeToDetail(image: items?.hits[indexPath.row].largeImageURL ?? "")
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
