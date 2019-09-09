@@ -17,7 +17,7 @@ class DetailViewController: UIViewController, DetailViewControllerInterface {
     var presenter: DetailPresenterInterface?
     //MARK: - Outles
     
-    @IBOutlet weak var imageDetail: UIImageView!
+    @IBOutlet weak var imageDetail: UIImageView?
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,7 @@ class DetailViewController: UIViewController, DetailViewControllerInterface {
         guard let url = URL(string: image) else {
             return
         }
-        imageDetail.load(from: url)
+        print(image)
+        imageDetail?.load(from: url)
     }
 }

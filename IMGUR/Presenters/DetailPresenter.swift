@@ -14,13 +14,14 @@ protocol DetailPresenterInterface {
 
 class DetailPresenter: DetailPresenterInterface {
     
-    unowned var view: DetailViewControllerInterface
+    weak var view: DetailViewControllerInterface?
     
     init (view: DetailViewControllerInterface) {
         self.view = view
     }
     
     func getImages(image: String) {
-        view.showImage(image: image)
+        view?.showImage(image: image)
+        print(image)
     }
 }

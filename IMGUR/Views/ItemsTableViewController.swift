@@ -129,9 +129,11 @@ extension ItemsTableViewController {
         guard let destination = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
             return
         }
-        destination.title = "DetailViewController"
-        destination.presenter?.getImages(image: pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
-        navigationController?.pushViewController(destination, animated: true)
+        
+        self.navigationController?.pushViewController(destination, animated: true)
+        destination.showImage(image: pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
+        print(pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
+        
         
     }
     

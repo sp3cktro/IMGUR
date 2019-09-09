@@ -14,7 +14,7 @@ protocol ItemsPresenterInterface {
 }
 
 class ItemsPrsenter: ItemsPresenterInterface {
-   private unowned let view: ItemsViewInterface
+   private weak var view: ItemsViewInterface?
   
     init(view: ItemsViewInterface) {
         self.view = view
@@ -24,7 +24,7 @@ class ItemsPrsenter: ItemsPresenterInterface {
         self.fetchItems(for: keyword) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.view.showItems(response: response)
+                self?.view?.showItems(response: response)
             case .failure:
                 break
             }
