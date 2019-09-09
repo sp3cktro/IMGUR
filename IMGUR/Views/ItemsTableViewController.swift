@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ItemsViewInterface: class {
-    func showItems()
+    func showItems(response: Pixabay)
 }
 
 class ItemsTableViewController: UITableViewController, ItemsViewInterface {
@@ -18,6 +18,7 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
     var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
     var blurEffectView: UIVisualEffectView?
     var presenter: ItemsPresenterInterface?
+    var pixabayModel: Pixabay?
     let spinner = UIActivityIndicatorView(style: .gray)
     
     //MARK: - Outlets
@@ -31,6 +32,7 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
         super.viewDidLoad()
         
         setup()
+        loadItems()
         
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
@@ -77,9 +79,17 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
         
     }
     
-    func showItems() {
+    private func loadItems() {
+        let keyword = "cat"
+        presenter?.getItems(keyword: keyword)
     }
-
+    
+    func showItems(response: Pixabay) {
+        pixabayModel = response
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
 }
 
 // MARK: - TableView Protocols
@@ -97,6 +107,14 @@ extension ItemsTableViewController {
             return UITableViewCell()
         }
         
+        cell.itemTitle?.text = pixabayModel?.hits[indexPath.row].tags
+        cell.userName?.text = pixabayModel?.hits[indexPath.row].user
+        guard let url = URL(string: pixabayModel?.hits[indexPath.row].largeImageURL ?? "") else {
+            return cell
+        }
+        cell.itemImage?.load(from: url)
+        cell.itemImage?.contentMode = .scaleAspectFit
+        
         return cell
     }
     
@@ -111,5 +129,19 @@ extension ItemsTableViewController {
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         spinner.startAnimating()
+    }
+}
+
+extension UIImageView {
+    func load(from url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
     }
 }

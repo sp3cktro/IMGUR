@@ -9,24 +9,39 @@
 import UIKit
 
 protocol ItemsPresenterInterface {
-    func getKeyWord(keyword: String)
-    func getImages(model: Pixabay)
+    func getItems(keyword: String)
+    func fetchItems(for keyword: String, completionHandler: @escaping (Result<Pixabay, Error>) -> ())
 }
 
 class ItemsPrsenter: ItemsPresenterInterface {
-    weak var view: ItemsViewInterface?
-    var model: Pixabay
-    
+   private unowned let view: ItemsViewInterface
+  
     init(view: ItemsViewInterface) {
         self.view = view
     }
     
-    func getKeyWord(keyword: String) {
-        <#code#>
+    func getItems(keyword: String) {
+        self.fetchItems(for: keyword) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.view.showItems(response: response)
+            case .failure:
+                break
+            }
+            
+        }
     }
     
-    func getImages(model: Pixabay) {
-        <#code#>
+    func fetchItems(for keyword: String, completionHandler: @escaping (Result<Pixabay, Error>) -> ()) {
+        ServiceLayer.request(router: ImageRouter.getImages(keyword)) { (result: Result<Pixabay, Error>) in
+            switch result {
+            case .success(let pixabay):
+                completionHandler(.success(pixabay))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
+
 }
 
