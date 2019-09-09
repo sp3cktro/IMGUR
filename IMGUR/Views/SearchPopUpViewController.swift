@@ -10,7 +10,6 @@ import UIKit
 
 class SearchPopUpViewController: UIViewController {
 
-    
     //MARK: - Outlets
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var keywordTextField: UITextField!

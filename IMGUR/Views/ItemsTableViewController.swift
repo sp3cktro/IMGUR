@@ -8,12 +8,18 @@
 
 import UIKit
 
-class ItemsTableViewController: UITableViewController {
+protocol ItemsViewInterface: class {
+    func showItems()
+}
+
+class ItemsTableViewController: UITableViewController, ItemsViewInterface {
 
     var image = UIImage(named: "search")
     var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
     var blurEffectView: UIVisualEffectView?
+    var presenter: ItemsPresenterInterface?
     let spinner = UIActivityIndicatorView(style: .gray)
+    
     //MARK: - Outlets
     @IBOutlet weak var magnifyingGlassButton: UIButton!
     @IBOutlet weak var headerView: UIView!
@@ -24,6 +30,7 @@ class ItemsTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
+        setup()
         
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
@@ -36,11 +43,20 @@ class ItemsTableViewController: UITableViewController {
         let itemCell = UINib(nibName: "ItemCell", bundle: nil)
         tableView.register(itemCell, forCellReuseIdentifier: "ItemCell")
         
-        
-        
         //Navigation bar configutarion
         image = image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:image, style: .plain, target: self, action: #selector( magnifyinGlassAction))
+    }
+    
+    //MARK: - Setup
+    func setupViewController(presenter: ItemsPresenterInterface) {
+        self.presenter = presenter
+    }
+
+    func setup() {
+        let view = self
+        let presenter = ItemsPrsenter(view: view)
+        setupViewController(presenter: presenter)
     }
     
     //MARK: - Methods
@@ -60,6 +76,10 @@ class ItemsTableViewController: UITableViewController {
         self.navigationController?.present(vc, animated: true)
         
     }
+    
+    func showItems() {
+    }
+
 }
 
 // MARK: - TableView Protocols
