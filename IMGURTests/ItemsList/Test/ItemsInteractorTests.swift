@@ -12,20 +12,34 @@ import XCTest
 class ItemsInteractorTests: XCTestCase {
     var sut: ItemsWorker?
     var mockPresenter: MockItemsListPresenter?
-    var workerSpy: MockItemsWorker?
+    var worker: ItemsWorker?
     
     override func setUp() {
         mockPresenter = MockItemsListPresenter()
         sut = ItemsWorker()
-        workerSpy = MockItemsWorker()
+        worker = ItemsWorker()
     }
-
+    
+    //  Integration test, this test is not following FIRST principles
     override func tearDown() {
-        
-
+        mockPresenter = nil
+        sut = nil
+        worker = nil
     }
 
     func testExample() {
-         
+        let dummyKeyword = "cats"
+        let dummyHit = ItemsLogicModel.Response.Hit(largeImageURL: "fakeURL", tags: "tag", user: "user", userImageURL: "url", previewURL: "previewURL")
+        let dummyResponse = ItemsLogicModel.Response.Pixabay(totalHits: 1, hits: [dummyHit])
+        worker?.getImages(for: dummyKeyword, completionHandler: { [weak self] result in
+            switch result {
+            case .success:
+                self!.mockPresenter?.presentTellDetail(reponse: dummyResponse)
+                break
+            case .failure:
+                break
+            }
+        })
+        XCTAssertTrue(mockPresenter!.presentTellDetailCalled)
     }
 }

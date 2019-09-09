@@ -20,12 +20,12 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
     var router: (ItemsRoutingLogic & ItemDataPassing)?
     var interactor: ItemBusinesslogic?
     var items: ItemsLogicModel.Response.Pixabay?
-
+    
     //MARKS: - Life Cycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
-       
+        
         setupScene()
         showItems()
         
@@ -45,7 +45,7 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
         
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "search_button_id"
     }
-
+    
     func setupViewController(interactor: ItemBusinesslogic, router: (ItemsRoutingLogic & ItemDataPassing)) {
         self.interactor = interactor
         self.router = router
@@ -58,17 +58,17 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
         let router = ItemRouter(dataStore: interactor, viewController: viewController)
         setupViewController(interactor: interactor, router: router)
     }
-   
+    
     //MARK: - Methods
     @objc private func refreshPhotos(_ sender: Any) {
         // Fetch Photos method here
         let timeToRefresh = DispatchTime.now() + .milliseconds(100)
         DispatchQueue.main.asyncAfter(deadline: timeToRefresh) { [weak self] in
-             self?.showItems()
+            self?.showItems()
         }
     }
     
-     @objc func magnifyinGlassAction(_ sender: Any) {
+    @objc func magnifyinGlassAction(_ sender: Any) {
         //View Controller Pop Up
         router?.routeToSearchPopUp()
         
@@ -80,10 +80,10 @@ final class ItemsTableViewController: UITableViewController, ItemDisplayLogic {
     func displayItems(itemsFetched: ItemsLogicModel.Response.Pixabay) {
         items = itemsFetched
         DispatchQueue.main.async() { [weak self] in
-           self?.tableView.reloadData()
+            self?.tableView.reloadData()
         }
-//        spinner.stopAnimating()
-//        refreshControl?.endRefreshing()
+        spinner.stopAnimating()
+        refreshControl?.endRefreshing()
     }
     
     func showItems() {
@@ -106,7 +106,7 @@ extension ItemsTableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell") as? ItemCell else {
             return UITableViewCell()
         }
-       
+        
         cell.itemTitle?.text = items?.hits[indexPath.row].tags
         cell.userName?.text = items?.hits[indexPath.row].user
         guard let url = URL(string: items?.hits[indexPath.row].largeImageURL ?? "" ) else {
