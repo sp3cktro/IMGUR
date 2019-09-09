@@ -32,8 +32,8 @@ enum ImageRouter {
         switch self {
         case .getImages(let queryString):
             return [URLQueryItem(name: "key", value: accessToken),
-            URLQueryItem(name: "q", value: queryString),
-            URLQueryItem(name: "per_page", value: "10")]
+                    URLQueryItem(name: "q", value: queryString),
+                    URLQueryItem(name: "per_page", value: "10")]
         }
     }
     
