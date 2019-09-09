@@ -10,6 +10,7 @@ import UIKit
 
 protocol ItemsViewInterface: class {
     func showItems(response: Pixabay)
+    func dismissVC()
 }
 
 class ItemsTableViewController: UITableViewController, ItemsViewInterface {
@@ -89,6 +90,11 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
+        dismissVC()
+    }
+    
+    func dismissVC() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -99,7 +105,7 @@ extension ItemsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 180
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,7 +130,9 @@ extension ItemsTableViewController {
             return
         }
         destination.title = "DetailViewController"
+        destination.presenter?.getImages(image: pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
         navigationController?.pushViewController(destination, animated: true)
+        
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

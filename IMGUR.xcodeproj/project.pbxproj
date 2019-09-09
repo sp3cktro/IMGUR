@@ -21,7 +21,7 @@
 		506ED3B323207FFD006DFD21 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506ED3B123207FFC006DFD21 /* ServiceLayer.swift */; };
 		506ED3B423207FFD006DFD21 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506ED3B223207FFC006DFD21 /* Router.swift */; };
 		50B84D712320687E003C8E51 /* Pixabay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50B84D702320687D003C8E51 /* Pixabay.swift */; };
-		FC0B8FFE2325D8F500CA4B7B /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B8FFD2325D8F500CA4B7B /* SearchPresenter.swift */; };
+		FC0AB0B8232692C30085057E /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AB0B7232692C30085057E /* DetailPresenter.swift */; };
 		FC0B90002325DC8C00CA4B7B /* ItemsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B8FFF2325DC8C00CA4B7B /* ItemsPresenter.swift */; };
 		FC0B90022325E4B100CA4B7B /* FetchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0B90012325E4B100CA4B7B /* FetchError.swift */; };
 		FC3514AE231857F300EB44D0 /* SearchPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3514AC231857F300EB44D0 /* SearchPopUpViewController.swift */; };
@@ -58,7 +58,7 @@
 		506ED3B123207FFC006DFD21 /* ServiceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
 		506ED3B223207FFC006DFD21 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		50B84D702320687D003C8E51 /* Pixabay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixabay.swift; sourceTree = "<group>"; };
-		FC0B8FFD2325D8F500CA4B7B /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		FC0AB0B7232692C30085057E /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		FC0B8FFF2325DC8C00CA4B7B /* ItemsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsPresenter.swift; sourceTree = "<group>"; };
 		FC0B90012325E4B100CA4B7B /* FetchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchError.swift; sourceTree = "<group>"; };
 		FC3514AC231857F300EB44D0 /* SearchPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPopUpViewController.swift; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 		FC0B8FF82325D6A500CA4B7B /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				FC0B8FFD2325D8F500CA4B7B /* SearchPresenter.swift */,
 				FC0B8FFF2325DC8C00CA4B7B /* ItemsPresenter.swift */,
+				FC0AB0B7232692C30085057E /* DetailPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -312,7 +312,6 @@
 				FC0B90002325DC8C00CA4B7B /* ItemsPresenter.swift in Sources */,
 				36795B822315946B00299651 /* ItemCell.swift in Sources */,
 				FC0B90022325E4B100CA4B7B /* FetchError.swift in Sources */,
-				FC0B8FFE2325D8F500CA4B7B /* SearchPresenter.swift in Sources */,
 				36795B7F231593D800299651 /* DetailViewController.swift in Sources */,
 				50B84D712320687E003C8E51 /* Pixabay.swift in Sources */,
 				FC3514AE231857F300EB44D0 /* SearchPopUpViewController.swift in Sources */,
@@ -320,6 +319,7 @@
 				42C6C16B231588420075B0E3 /* AppDelegate.swift in Sources */,
 				506ED3B323207FFD006DFD21 /* ServiceLayer.swift in Sources */,
 				2332D8B52321C9CC00266993 /* NetworkingProtocols.swift in Sources */,
+				FC0AB0B8232692C30085057E /* DetailPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +448,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -502,6 +503,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -511,6 +513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YSTKY98386;
 				INFOPLIST_FILE = IMGUR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -529,6 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YSTKY98386;
 				INFOPLIST_FILE = IMGUR/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (

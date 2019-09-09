@@ -37,10 +37,25 @@ class SearchPopUpViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        guard let navigation = self.presentingViewController as? UINavigationController, let destinationVC = navigation.viewControllers.first as? ItemsTableViewController else {
+            return
+        }
+        destinationVC.dismissVC()
     }
     
     @IBAction func searchAction(_ sender: Any) {
+        guard let keyword = keywordTextField.text else {
+            return
+        }
+        passKeywordToItemsList(keyword: keyword)
+    }
+    
+    func passKeywordToItemsList(keyword: String) {
+        guard let navigation = self.presentingViewController as? UINavigationController, let destinationVC = navigation.viewControllers.first as? ItemsTableViewController else {
+            return
+        }
+        
+        destinationVC.presenter?.getItems(keyword: keyword)
     }
  
 }

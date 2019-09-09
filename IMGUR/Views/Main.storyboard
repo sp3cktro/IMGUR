@@ -32,6 +32,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sdD-Xc-AdJ"/>
                     </view>
+                    <connections>
+                        <outlet property="imageDetail" destination="nhv-H8-wuW" id="sjG-1x-CLX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zSb-RD-Wib" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

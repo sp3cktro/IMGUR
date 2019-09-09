@@ -8,11 +8,37 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+protocol DetailViewControllerInterface: class {
+    func showImage(image: String)
+}
 
+class DetailViewController: UIViewController, DetailViewControllerInterface {
+    //MARK: - Properties
+    var presenter: DetailPresenterInterface?
+    //MARK: - Outles
+    
+    @IBOutlet weak var imageDetail: UIImageView!
+    //MARK: - Life Cycle
     override func viewDidLoad() {
-        navigationController?.isNavigationBarHidden = false
         super.viewDidLoad()
-
+        setup()
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    //MARK: - Setup
+    func setupView(presenter: DetailPresenterInterface) {
+        self.presenter = presenter
+    }
+    func setup() {
+        let view = self
+        let presenter = DetailPresenter(view: view)
+        setupView(presenter: presenter)
+    }
+    //MARK: - Methods
+    func showImage(image: String) {
+        guard let url = URL(string: image) else {
+            return
+        }
+        imageDetail.load(from: url)
     }
 }
