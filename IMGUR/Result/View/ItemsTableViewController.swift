@@ -9,6 +9,8 @@
 import UIKit
 
 class ItemsTableViewController: UITableViewController {
+    
+    var viewModel: ResultViewModelProtocol?
 
     var image = UIImage(named: "search")
     var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
@@ -24,6 +26,8 @@ class ItemsTableViewController: UITableViewController {
         
         super.viewDidLoad()
         
+        viewModel = ResultViewModel()
+        viewModel?.delegate = self
         
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
@@ -36,11 +40,10 @@ class ItemsTableViewController: UITableViewController {
         let itemCell = UINib(nibName: "ItemCell", bundle: nil)
         tableView.register(itemCell, forCellReuseIdentifier: "ItemCell")
         
-        
-        
         //Navigation bar configutarion
         image = image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:image, style: .plain, target: self, action: #selector( magnifyinGlassAction))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "search_button_id"
     }
     
     //MARK: - Methods
@@ -58,24 +61,25 @@ class ItemsTableViewController: UITableViewController {
         let vc = SearchPopUpViewController(nibName: "SearchPopUpViewController", bundle: nil)
         vc.modalPresentationStyle = .overCurrentContext
         self.navigationController?.present(vc, animated: true)
-        
     }
 }
 
 // MARK: - TableView Protocols
 extension ItemsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.hits?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 180
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell") as? ItemCell else {
             return UITableViewCell()
         }
+        
+        cell.viewModel = viewModel?.hits?[indexPath.row]
         
         return cell
     }
@@ -86,10 +90,20 @@ extension ItemsTableViewController {
             return
         }
         destination.title = "DetailViewController"
+        destination.setViewModel()
+        destination.setImage(from: viewModel?.hits?[indexPath.row].largeImageURL)
         navigationController?.pushViewController(destination, animated: true)
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         spinner.startAnimating()
+    }
+}
+
+extension ItemsTableViewController: ResultViewDelegate {
+    func reloadDataInView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }

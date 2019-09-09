@@ -9,7 +9,8 @@
 import UIKit
 
 class SearchPopUpViewController: UIViewController {
-
+    
+    var viewModel: SearchViewModelProtocol?
     
     //MARK: - Outlets
     @IBOutlet weak var searchView: UIView!
@@ -27,10 +28,14 @@ class SearchPopUpViewController: UIViewController {
         //Navigation controller configuration
         navigationController?.isNavigationBarHidden = true
         
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.frame
+        blurEffectView.frame = UIScreen.main.bounds
         view.insertSubview(blurEffectView, at: 0)
+        
+        guard let parentNavigationController = presentingViewController as? UINavigationController, let parentViewController = parentNavigationController.viewControllers.first as? ItemsTableViewController else { return }
+        
+        viewModel = SearchViewModel(parentViewModel:  parentViewController.viewModel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,8 +47,8 @@ class SearchPopUpViewController: UIViewController {
     }
     
     @IBAction func searchAction(_ sender: Any) {
+        guard let entry = keywordTextField.text else { return }
+        viewModel?.search(entry)
+        dismiss(animated: true, completion: nil)
     }
- 
 }
-
-

@@ -13,4 +13,12 @@ class ItemCell: UITableViewCell {
     @IBOutlet weak var itemImage: UIImageView?
     @IBOutlet weak var itemTitle: UILabel?
     @IBOutlet weak var userName: UILabel?
+    
+    var viewModel: Hit? {
+        didSet {
+            itemTitle?.text = viewModel?.tags
+            userName?.text = viewModel?.user
+            itemImage?.load(from: viewModel?.largeImageURL)
+        }
+    }
 }
