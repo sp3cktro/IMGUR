@@ -13,9 +13,9 @@ protocol ItemsPresenterInterface {
     func fetchItems(for keyword: String, completionHandler: @escaping (Result<Pixabay, Error>) -> ())
 }
 
-class ItemsPrsenter: ItemsPresenterInterface {
+final class ItemsPrsenter: ItemsPresenterInterface {
     private weak var view: ItemsViewInterface?
-  
+    
     init(view: ItemsViewInterface) {
         self.view = view
     }
@@ -28,7 +28,6 @@ class ItemsPrsenter: ItemsPresenterInterface {
             case .failure:
                 break
             }
-            
         }
     }
     
@@ -42,6 +41,5 @@ class ItemsPrsenter: ItemsPresenterInterface {
             }
         }
     }
-
 }
 

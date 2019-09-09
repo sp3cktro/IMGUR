@@ -13,7 +13,7 @@
         <!--DetailView-->
         <scene sceneID="aa6-ig-0IX">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="u3x-D9-LGe" userLabel="DetailView" customClass="DetailViewController" customModule="IMGUR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="u3x-D9-LGe" userLabel="DetailView" customClass="DetailViewController" customModule="IMGUR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="szn-gL-H2y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,6 +21,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nhv-H8-wuW">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="detail_image_view">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,7 +36,7 @@
                         <viewLayoutGuide key="safeArea" id="sdD-Xc-AdJ"/>
                     </view>
                     <connections>
-                        <outlet property="imageDetail" destination="nhv-H8-wuW" id="ARG-Xd-qld"/>
+                        <outlet property="imageDetail" destination="nhv-H8-wuW" id="ANl-lN-VHh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zSb-RD-Wib" userLabel="First Responder" sceneMemberID="firstResponder"/>

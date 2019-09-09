@@ -12,15 +12,16 @@ protocol DetailViewControllerInterface: class {
     var imageUrl: String { get set }
 }
 
-class DetailViewController: UIViewController, DetailViewControllerInterface {
-
+final class DetailViewController: UIViewController, DetailViewControllerInterface {
+    
     //MARK: - Properties
     var presenter: DetailPresenterInterface?
     var imageUrl: String = ""
-    //MARK: - Outles
     
+    //MARK: - Outles
     @IBOutlet weak var imageDetail: UIImageView?
     //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -29,6 +30,7 @@ class DetailViewController: UIViewController, DetailViewControllerInterface {
         imageDetail?.load(from: url)
         
         navigationController?.isNavigationBarHidden = false
+        navigationItem.leftBarButtonItem?.accessibilityIdentifier = "detail_back_button"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {

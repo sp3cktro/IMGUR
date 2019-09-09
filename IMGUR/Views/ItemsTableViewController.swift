@@ -13,11 +13,12 @@ protocol ItemsViewInterface: class {
     func dismissVC()
 }
 
-class ItemsTableViewController: UITableViewController, ItemsViewInterface {
-
-    var image = UIImage(named: "search")
-    var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
-    var blurEffectView: UIVisualEffectView?
+final class ItemsTableViewController: UITableViewController, ItemsViewInterface {
+    
+    //MARK: - Properties
+    private var image = UIImage(named: "search")
+    private var blurEffect: UIBlurEffect? = UIBlurEffect(style: .regular)
+    private var blurEffectView: UIVisualEffectView?
     var presenter: ItemsPresenterInterface?
     var pixabayModel: Pixabay?
     let spinner = UIActivityIndicatorView(style: .gray)
@@ -26,14 +27,15 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
     @IBOutlet weak var magnifyingGlassButton: UIButton!
     @IBOutlet weak var headerView: UIView!
     
-
     //MARKS: - Life Cycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         setup()
-        loadItems()
+        
+        let keyword = "cat"
+        loadItems(keyword: keyword)
         
         spinner.color = UIColor.darkGray
         spinner.hidesWhenStopped = true
@@ -49,14 +51,15 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
         //Navigation bar configutarion
         image = image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:image, style: .plain, target: self, action: #selector( magnifyinGlassAction))
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "search_button_id"
     }
     
     //MARK: - Setup
-    func setupViewController(presenter: ItemsPresenterInterface) {
+    private func setupViewController(presenter: ItemsPresenterInterface) {
         self.presenter = presenter
     }
-
-    func setup() {
+    
+    private func setup() {
         let view = self
         let presenter = ItemsPrsenter(view: view)
         setupViewController(presenter: presenter)
@@ -71,7 +74,7 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
         }
     }
     
-     @objc private func magnifyinGlassAction(_ sender: Any) {
+    @objc private func magnifyinGlassAction(_ sender: Any) {
         
         //View Controller Pop Up
         let vc = SearchPopUpViewController(nibName: "SearchPopUpViewController", bundle: nil)
@@ -80,8 +83,7 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
         
     }
     
-    private func loadItems() {
-        let keyword = "cat"
+    private func loadItems(keyword: String) {
         presenter?.getItems(keyword: keyword)
     }
     
@@ -101,7 +103,7 @@ class ItemsTableViewController: UITableViewController, ItemsViewInterface {
 // MARK: - TableView Protocols
 extension ItemsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return pixabayModel?.hits.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,25 +135,9 @@ extension ItemsTableViewController {
         self.navigationController?.pushViewController(destination, animated: true)
         destination.presenter?.getImages(image: pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
         print(pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
-        
-        
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         spinner.startAnimating()
-    }
-}
-
-extension UIImageView {
-    func load(from url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
     }
 }

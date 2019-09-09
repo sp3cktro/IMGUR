@@ -8,8 +8,12 @@
 
 import UIKit
 
-class SearchPopUpViewController: UIViewController {
+protocol SearchPopUpViewControllerInterface {
+    func passKeywordToItemsList(keyword: String)
+}
 
+final class SearchPopUpViewController: UIViewController {
+    
     //MARK: - Outlets
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var keywordTextField: UITextField!
@@ -22,32 +26,33 @@ class SearchPopUpViewController: UIViewController {
         
         let searchContainer = searchView
         searchContainer?.layer.cornerRadius = 6
-    
+        
         //Navigation controller configuration
         navigationController?.isNavigationBarHidden = true
         
-        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.frame
+        blurEffectView.frame = UIScreen.main.bounds
         view.insertSubview(blurEffectView, at: 0)
+        
+        keywordTextField.accessibilityIdentifier = "search_keyword_text_field"
+        searchButton.accessibilityIdentifier = "search_search_button"
+        cancelButton.accessibilityIdentifier = "search_cancel_button"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
     }
     
-    @IBAction func cancelAction(_ sender: Any) {
+    @IBAction private func cancelAction(_ sender: Any) {
         guard let navigation = self.presentingViewController as? UINavigationController, let destinationVC = navigation.viewControllers.first as? ItemsTableViewController else {
             return
         }
         destinationVC.dismissVC()
     }
     
-    @IBAction func searchAction(_ sender: Any) {
-        guard let keyword = keywordTextField.text else {
-            return
-        }
-        passKeywordToItemsList(keyword: keyword)
+    @IBAction private func searchAction(_ sender: Any) {
+        keywordIsEmpty()
     }
     
     func passKeywordToItemsList(keyword: String) {
@@ -57,7 +62,17 @@ class SearchPopUpViewController: UIViewController {
         
         destinationVC.presenter?.getItems(keyword: keyword)
     }
- 
+    
+    func keywordIsEmpty() {
+        guard let keyword = keywordTextField.text else {
+            return
+        }
+        let keywordWithoutWhiteSpaces = keyword.trimmingCharacters(in: .whitespaces).isEmpty
+        
+        if !keywordWithoutWhiteSpaces {
+            passKeywordToItemsList(keyword: keyword)
+        } else {
+            keywordTextField.placeholder = "Your search is empty"
+        }
+    }
 }
-
-

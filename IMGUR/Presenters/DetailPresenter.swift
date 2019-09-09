@@ -12,7 +12,7 @@ protocol DetailPresenterInterface {
     func getImages(image: String)
 }
 
-class DetailPresenter: DetailPresenterInterface {
+final class DetailPresenter: DetailPresenterInterface {
     
     weak var view: DetailViewControllerInterface?
     
