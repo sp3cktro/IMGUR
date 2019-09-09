@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchPopUpViewController" customModule="IMGUR" customModuleProvider="target">
             <connections>
-                <outlet property="cancelButton" destination="RbV-VC-Ye7" id="OlC-ZD-STd"/>
+                <outlet property="cancelButton" destination="RbV-VC-Ye7" id="Slq-vO-kbV"/>
                 <outlet property="keywordTextField" destination="ges-kp-I05" id="NWx-fr-5VH"/>
                 <outlet property="searchButton" destination="xGh-Tj-ObI" id="rgS-sD-pu5"/>
                 <outlet property="searchView" destination="owK-V9-go0" id="AjM-Z5-EBf"/>
@@ -26,31 +26,19 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What we gonna search?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ac6-he-Fxg">
                     <rect key="frame" x="16" y="86" width="288" height="72"/>
+                    <accessibility key="accessibilityConfiguration" identifier="search_title_label"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owK-V9-go0">
-                    <rect key="frame" x="55.5" y="233" width="209" height="102"/>
+                    <rect key="frame" x="48" y="258" width="224" height="94.5"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGh-Tj-ObI">
-                            <rect key="frame" x="44" y="51" width="53" height="30"/>
-                            <state key="normal" title="Search!"/>
-                            <connections>
-                                <action selector="searchAction:" destination="-1" eventType="touchUpInside" id="0fo-AD-GCS"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbV-VC-Ye7">
-                            <rect key="frame" x="131" y="51" width="48" height="30"/>
-                            <state key="normal" title="Cancel">
-                                <color key="titleColor" red="0.91110092399999998" green="0.23265191909999999" blue="0.1928427815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="dqm-zg-GO1"/>
-                            </connections>
-                        </button>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="keyword" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ges-kp-I05">
-                            <rect key="frame" x="26" y="8" width="157" height="30"/>
+                            <rect key="frame" x="26" y="8" width="172" height="30"/>
+                            <accessibility key="accessibilityConfiguration" identifier="search_keyword_text_field">
+                                <bool key="isElement" value="YES"/>
+                            </accessibility>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="gOl-WP-DvB"/>
                             </constraints>
@@ -58,34 +46,59 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xGh-Tj-ObI">
+                            <rect key="frame" x="44" y="68" width="53" height="6"/>
+                            <accessibility key="accessibilityConfiguration" identifier="search_search_button"/>
+                            <state key="normal" title="Search!"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="search_search_button"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="searchAction:" destination="-1" eventType="touchUpInside" id="0fo-AD-GCS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbV-VC-Ye7">
+                            <rect key="frame" x="141" y="68" width="53" height="6"/>
+                            <accessibility key="accessibilityConfiguration" identifier="search_cancel_button"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" red="0.91110092399999998" green="0.23265191909999999" blue="0.1928427815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="dqm-zg-GO1"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.34607769691780821" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration" identifier="search_container_view">
+                        <accessibilityTraits key="traits" none="YES"/>
+                        <bool key="isElement" value="NO"/>
+                    </accessibility>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ges-kp-I05" secondAttribute="trailing" constant="26" id="0bU-wb-2Mk"/>
-                        <constraint firstAttribute="bottom" secondItem="xGh-Tj-ObI" secondAttribute="bottom" constant="21" id="J4x-LZ-T2g"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RbV-VC-Ye7" secondAttribute="bottom" constant="20.5" id="80h-mH-OIc"/>
+                        <constraint firstItem="xGh-Tj-ObI" firstAttribute="top" secondItem="ges-kp-I05" secondAttribute="bottom" constant="30" id="Jao-kM-ebJ"/>
                         <constraint firstItem="ges-kp-I05" firstAttribute="leading" secondItem="owK-V9-go0" secondAttribute="leading" constant="26" id="KPF-Id-dza"/>
                         <constraint firstItem="xGh-Tj-ObI" firstAttribute="leading" secondItem="owK-V9-go0" secondAttribute="leading" constant="44" id="LBA-gk-DTd"/>
-                        <constraint firstItem="RbV-VC-Ye7" firstAttribute="width" secondItem="owK-V9-go0" secondAttribute="height" multiplier="8:17" id="N4D-C5-dpR"/>
                         <constraint firstAttribute="trailing" secondItem="RbV-VC-Ye7" secondAttribute="trailing" constant="30" id="T0L-pw-bcA"/>
                         <constraint firstItem="ges-kp-I05" firstAttribute="top" secondItem="owK-V9-go0" secondAttribute="top" constant="8" id="UJm-ze-5pO"/>
-                        <constraint firstItem="xGh-Tj-ObI" firstAttribute="width" secondItem="owK-V9-go0" secondAttribute="height" multiplier="53:102" id="VSM-Ab-9KQ"/>
-                        <constraint firstAttribute="bottom" secondItem="RbV-VC-Ye7" secondAttribute="bottom" constant="21" id="tPx-4g-eg8"/>
+                        <constraint firstItem="RbV-VC-Ye7" firstAttribute="top" secondItem="ges-kp-I05" secondAttribute="bottom" constant="30" id="aWs-oK-XKf"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xGh-Tj-ObI" secondAttribute="bottom" constant="20.5" id="i23-Ip-sda"/>
+                        <constraint firstItem="xGh-Tj-ObI" firstAttribute="width" secondItem="RbV-VC-Ye7" secondAttribute="width" id="lxt-nb-ZRn"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.26324555837563457" green="0.26324555837563457" blue="0.26324555837563457" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="owK-V9-go0" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3PM-Od-Efj"/>
+                <constraint firstItem="owK-V9-go0" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="4vr-FZ-lWb"/>
                 <constraint firstItem="ac6-he-Fxg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="66" id="8gI-Ai-9XL"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="owK-V9-go0" secondAttribute="bottom" constant="233" id="Dwe-Ta-Xq6"/>
-                <constraint firstItem="owK-V9-go0" firstAttribute="top" secondItem="ac6-he-Fxg" secondAttribute="bottom" constant="75" id="OCU-5y-SZT"/>
+                <constraint firstItem="owK-V9-go0" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1:6" id="FxJ-GZ-mL5"/>
+                <constraint firstItem="owK-V9-go0" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="G25-dd-hz5"/>
+                <constraint firstItem="owK-V9-go0" firstAttribute="top" secondItem="ac6-he-Fxg" secondAttribute="bottom" constant="100" id="eq4-As-m1A"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ac6-he-Fxg" secondAttribute="trailing" constant="16" id="heY-j5-8sU"/>
                 <constraint firstItem="ac6-he-Fxg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="i2M-5D-07m"/>
-                <constraint firstItem="owK-V9-go0" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="209:568" id="oCc-jb-TWD"/>
-                <constraint firstItem="owK-V9-go0" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="uoJ-bK-9b4"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="131.25" y="92.957746478873247"/>
+            <point key="canvasLocation" x="130.43478260869566" y="92.410714285714278"/>
         </view>
     </objects>
 </document>

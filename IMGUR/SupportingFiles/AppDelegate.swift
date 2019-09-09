@@ -15,7 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let itemsTableViewController = ItemsTableViewController()
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let itemsTableViewController = storyboard.instantiateViewController(withIdentifier: "ItemsTableViewController") as? ItemsTableViewController else {
+            return true
+        }
         let navigationController = UINavigationController(rootViewController: itemsTableViewController)
         
         let screen = UIScreen.main
