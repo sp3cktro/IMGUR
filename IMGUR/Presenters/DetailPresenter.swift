@@ -21,7 +21,6 @@ class DetailPresenter: DetailPresenterInterface {
     }
     
     func getImages(image: String) {
-        view?.showImage(image: image)
-        print(image)
+        view?.imageUrl = image
     }
 }

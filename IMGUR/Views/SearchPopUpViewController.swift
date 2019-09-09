@@ -37,9 +37,6 @@ class SearchPopUpViewController: UIViewController {
     }
     
     @IBAction func cancelAction(_ sender: Any) {
-        
-        guard let image = image, let imageURL = URL(string: image) else { return }
-        
         guard let navigation = self.presentingViewController as? UINavigationController, let destinationVC = navigation.viewControllers.first as? ItemsTableViewController else {
             return
         }

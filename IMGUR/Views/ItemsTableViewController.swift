@@ -131,7 +131,7 @@ extension ItemsTableViewController {
         }
         
         self.navigationController?.pushViewController(destination, animated: true)
-        destination.showImage(image: pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
+        destination.presenter?.getImages(image: pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
         print(pixabayModel?.hits[indexPath.row].largeImageURL ?? "")
         
         

@@ -14,7 +14,7 @@ protocol ItemsPresenterInterface {
 }
 
 class ItemsPrsenter: ItemsPresenterInterface {
-   private weak var view: ItemsViewInterface?
+    private weak var view: ItemsViewInterface?
   
     init(view: ItemsViewInterface) {
         self.view = view

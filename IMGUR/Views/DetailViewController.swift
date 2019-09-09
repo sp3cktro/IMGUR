@@ -9,12 +9,14 @@
 import UIKit
 
 protocol DetailViewControllerInterface: class {
-    func showImage(image: String)
+    var imageUrl: String { get set }
 }
 
 class DetailViewController: UIViewController, DetailViewControllerInterface {
+
     //MARK: - Properties
     var presenter: DetailPresenterInterface?
+    var imageUrl: String = ""
     //MARK: - Outles
     
     @IBOutlet weak var imageDetail: UIImageView?
@@ -22,7 +24,21 @@ class DetailViewController: UIViewController, DetailViewControllerInterface {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        //MARK: - Prepare image
+        guard let url = URL(string: imageUrl) else { return }
+        imageDetail?.load(from: url)
+        
         navigationController?.isNavigationBarHidden = false
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
     }
     
     //MARK: - Setup
@@ -33,13 +49,5 @@ class DetailViewController: UIViewController, DetailViewControllerInterface {
         let view = self
         let presenter = DetailPresenter(view: view)
         setupView(presenter: presenter)
-    }
-    //MARK: - Methods
-    func showImage(image: String) {
-        guard let url = URL(string: image) else {
-            return
-        }
-        print(image)
-        imageDetail?.load(from: url)
     }
 }
